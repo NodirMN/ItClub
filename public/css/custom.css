@@ -1,0 +1,20 @@
+/* Write your custom CSS here */
+.tr-card-icon{
+    width: auto;
+    height: auto;
+}
+.btn {
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+
+.page-header .navbar #headerNav>ul>li>a img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 2px solid #7888fc;
+    padding: 2px;
+    float: left;
+}

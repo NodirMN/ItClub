@@ -1,0 +1,179 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+        <h5 class="card-title">{{title}}</h5>
+                {{!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcat">
+                Новый раздел
+        </button> --}}
+        </div>
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>№</th>
+        <th>Аватар</th>
+        <th scope="col">Ф.И.О</th>
+        <th scope="col">Почта</th>
+        <th scope="col">Телефон</th>
+        <th scope="col">Статус </th>
+        <th colspan="2" class="text-center">Изменить</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each users}}
+            <tr>
+                <th>{{@index}}</th>
+                <th><img src="/{{img}}" width="50"></th>
+                <td>{{name}}</td>
+                <th>{{login}}</th>
+                <th>{{eamil}}</th>
+
+    
+                <td><a href="/users/status/{{_id}}">{{{status}}}</a></td>
+                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#upcat"
+                onclick="edit('{{_id}}')"
+                >
+                <i class="fa fa-pen"></i>
+        </button></td>
+                <td>
+                    <a href="/users/delete/{{_id}}" class="btn btn-danger" onclick="return confirm('Qaroringiz qatiymi?')"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+    </div>
+</div>
+
+
+
+
+ {{!-- <div class="modal fade" id="newcat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Новая категория</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <form action="/users?_csrf={{csrf}}" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="">Иконка категорий</label>
+                            <input class="form-control" name="img" type="file" id="img" multiple="">
+                    </div>
+                        <div class="form-floating mb-3">
+                                <input type="text" 
+                                class="form-control" 
+                                name="title"
+                                id="floatingInput" 
+                                required="required"
+                                placeholder="Заголовок раздела">
+                                <label for="floatingInput">Заголовок раздела</label>
+                                </div>
+                        <div class="form-floating mb-3">
+                                <input type="number" 
+                                value="0"
+                                name="order"
+                                required="required"
+                                class="form-control" 
+                                id="floatingInput" 
+                                placeholder="Порядковый номер">
+                                <label for="floatingInput">Порядковый номер</label>
+                                </div>
+                        <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="menu"
+                                        value="1"
+                                        id="flexSwitchCheckChecked" checked="">
+                                    
+                                        <label class="form-check-label" for="flexSwitchCheckChecked">Выход на домашнюю страницу</label>
+                                    </div> 
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="status"
+                                        value="1"
+                                        id="faol" checked="">
+                                    
+                                        <label class="form-check-label" for="faol">Активный?</label>
+                                    </div>                
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрывать</button>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+                    </form> 
+        </div>
+        </div>
+    </div> --}}
+
+
+    <div class="modal fade" id="upcat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Редактировать раздел</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <form action="/users/save?_csrf={{csrf}}" method="post" name="editform" enctype="multipart/form-data">
+                    <div class="mb-3">
+                    <label for="">Иконка категорий</label>
+                    <div class="row align-items-center" >
+                    <div class="col-6">
+                        <img src="" alt="" id="showimg" width="60" style="display:none ;">
+                            </div>
+                            <div class="col-6">
+                            <input class="form-control" name="img" type="file" id="img" multiple="">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" name="_id">
+                        <div class="form-floating mb-3">
+                                <input type="text" 
+                                class="form-control" 
+                                name="name"
+                                id="floatingInput" 
+                                required="required"
+                                placeholder="Заголовок раздела">
+                                <label for="floatingInput">Заголовок раздела</label>
+                                </div>
+                        <div class="form-floating mb-3">
+                                <input type="text" 
+                              
+                                name="login"
+                                required="required"
+                                class="form-control" 
+                                id="floatingInput" 
+                                placeholder="Порядковый номер">
+                                <label for="floatingInput">Порядковый номер</label>
+                                </div>
+                          
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрывать</button>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+                    </form> 
+        </div>
+        </div>
+    </div>
+
+
+<script>
+        let form = document.forms.editform
+        let img = document.getElementById('showimg')
+        function edit(id){
+            fetch(`/users/get/${id}`)
+            .then(res => res.json())
+            .then(users =>{
+                form.title.value = users.title
+                form._id.value = users._id
+                form.name.value = users.name
+                if(users.img){
+                    img.setAttribute('src', `${users.img}`)
+                    img.style.display = 'block'
+                }
+            })
+        }
+    </script>  

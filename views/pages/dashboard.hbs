@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-md-6 col-xl-3">
+        <div class="card stat-widget">
+        <div class="card-body">
+          <h5 class="card-title">Продукты</h5>
+            
+            <div class="d-flex align-items-center justify-content-between ">
+            <p>Общая количесто:</p>
+            <h2>{{product.length}}</h2>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card stat-widget">
+        <div class="card-body">
+            <h5 class="card-title">Категорий</h5>
+            <div class="d-flex align-items-center justify-content-between ">
+            <p>Общая количесто:</p>
+            <h2>{{category.length}}</h2>
+            
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card stat-widget">
+        <div class="card-body">
+            <h5 class="card-title">Пользователь</h5>
+            <div class="d-flex align-items-center justify-content-between ">
+            <p>Общая количесто:</p>
+            <h2>{{users.length}}</h2>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card stat-widget">
+        <div class="card-body">
+            <h5 class="card-title">Заказы</h5>
+            <div class="d-flex align-items-center justify-content-between ">
+            <p>Общая количесто:</p>
+            <h2>{{oneclick.length}}</h2>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-8">
+                      <div class="card table-widget">
+                          <div class="card-body">
+                              <h5 class="card-title">Последние продукты</h5>
+                              <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Фото</th>
+                                    <th scope="col">Название</th>
+                                      <th scope="col">Категорий продукта</th>
+                                    <th scope="col">Стоимсть</th>
+                                    <th scope="col">Статус</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each product}}
+                                    <tr>
+                                      <th scope="row"><img src="/{{img}}" width="50"></th>
+                                      <td>{{title}}</td>
+                                      <td>{{category.title}}</td>
+                                      <td>{{price}} so'm</td>
+                                      <td>{{{status}}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                      </div>
+            </div>
+            <div class="col-sm-6 col-xl-4">
+                    <div class="card stat-widget">
+                        <div class="card-body">
+                            <h5 class="card-title">Категория списоков</h5>
+                            {{#each category}}
+                        <div class="transactions-list">
+                                <div class="tr-item">
+                                <div class="tr-company-name">
+                                    <div class="tr-icon tr-card-icon tr-card-bg-primary text-primary">
+                                        <img src="/{{img}}" alt="" width="40"> 
+                                    </div>
+                                    <div class="tr-text">
+                                    <h4>{{title}}</h4>
+                                    <p>{{count}}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        
+                        </div>
+                    </div>
+        </div>
+</div>

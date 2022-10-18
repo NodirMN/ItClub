@@ -1,0 +1,116 @@
+{{!-- <div class="row justify-content-md-center">
+    
+    <div class="col-md-12 col-lg-4">
+        <div class="card login-box-container">
+            
+        <div class="card-body">
+            <div class="mb-3">
+        {{#if error}}
+            <div class="alert alert-danger show" role="alert">
+        {{error}}
+                        </div>
+        {{/if}}
+        </div>
+            <div class="authent-logo">
+            <img src="/images/logo@2x.png" alt="" />
+            </div>
+            <div class="authent-text">
+            <p>Admin panelga xush kelibsiz</p>
+            <p>Iltimos accountingizni kiriting</p>
+            </div>
+
+            <form action="/users/login" method="post">
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                <input
+                    type="text"
+                    name="login"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Login"
+                />
+                <label for="floatingInput">Login</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                />
+                <label for="floatingPassword">Password</label>
+                </div>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-info m-b-xs">Kirish</button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </div>
+</div> --}}
+
+
+
+
+<div class="row justify-content-md-center">
+    <div class="col-md-12 col-lg-4">
+        <div class="card login-box-container">
+        <div class="card-body">
+            <div class="card-body">
+            <div class="mb-3">
+        {{#if error}}
+            <div class="alert alert-danger show" role="alert">
+        {{error}}
+                        </div>
+        {{/if}}
+        </div>
+            <div class="authent-logo">
+            <img src="/images/logo@2x.png" alt="" />
+            </div>
+            <div class="authent-text">
+            <p>Добро пожаловать в админ-панель</p>
+            <p>Пожалуйста, введите свой аккаунт</p>
+            </div>
+
+            <form action="/users/login" method="post">
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                <input
+                    type="text"
+                    name="login"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Login"
+                />
+                <label for="floatingInput">Логин</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                />
+                <label for="floatingPassword">Пароль</label>
+                </div>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-info m-b-xs">Войти</button>
+            </div>
+            </form>
+            {{!-- <div class="authent-reg">
+            <p>Не прошли перерегистрацию? <a href="/users/reg">Создать аккаунт</a></p>
+            </div> --}}
+        </div>
+        </div>
+    </div>
+</div>

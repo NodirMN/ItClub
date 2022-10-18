@@ -1,0 +1,71 @@
+<div class="page-sidebar">
+  <ul class="list-unstyled accordion-menu">
+    <li {{#if isHome}}
+      class="active-page"
+    {{/if}}>
+      <a href="/"><i data-feather="home"></i>Главная</a>
+    </li>
+    <li class="sidebar-title">
+      Заказы
+    </li>
+    <li {{#if isOneclick}}
+      class="active-page"
+    {{/if}}>
+      <a href="/oneclick"><i data-feather="shopping-cart"></i>Заказы</a>
+    </li>
+    <li class="sidebar-title">
+      Управления контентом
+    </li>
+    <li {{#if isCategory}}
+      class="active-page"
+    {{/if}}>
+      <a href="/category"><i data-feather="grid"></i>Категория</a>
+    </li>
+    <li  {{#if isAttribute}}
+      class="active-page"
+    {{/if}}>
+      <a href="/attribute"><i data-feather="codesandbox"></i>Атрибут</a>
+    </li>
+    <li  {{#if isProduct}}
+      class="active-page"
+    {{/if}}>
+      <a href="/product"><i data-feather="truck"></i>Продукты</a>
+    </li>
+      <li {{#if isSlider}}
+      class="active-page"
+    {{/if}}>
+      <a href="/slider"><i data-feather="list"></i>Слайдер</a>
+    </li>
+    <li {{#if isBlog}}
+      class="active-page"
+    {{/if}}>
+      <a href="/blog"><i data-feather="columns"></i>Новости</a>
+    </li>
+    <li {{#if isPage}}
+      class="active-page"
+    {{/if}}>
+      <a href="/page"><i data-feather="layers"></i>Страницы</a>
+    </li>
+      <li  {{#if isPromo}}
+      class="active-page"
+    {{/if}}>
+      <a href="/promo"><i data-feather="award"></i>Акции</a>
+    </li>
+    <li class="sidebar-title" >Клиентский Запросы</li>
+     <li  {{#if isFrontuser}}
+      class="active-page"
+    {{/if}}>
+      <a href="/frontuser"><i data-feather="user"></i>Пользователь</a>
+    </li>
+    <li  {{#if isFeedback}}
+      class="active-page"
+    {{/if}}>
+      <a href="/feedback"><i data-feather="message-square"></i>Обрашения</a>
+    </li>
+    <li  {{#if isVacancy}}
+      class="active-page"
+    {{/if}}>
+      <a href="/vacancy"><i data-feather="briefcase"></i>Вакансия</a>
+    </li>
+  </ul>
+</div>

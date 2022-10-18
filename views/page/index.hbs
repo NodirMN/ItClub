@@ -1,0 +1,208 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+        <h5 class="card-title">{{title}}</h5>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcat">
+                Новый странитц
+        </button>
+        </div>
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>№</th>
+        <th scope="col">Названия</th>
+        <th scope="col">Меню</th>
+        <th scope="col">Форма</th>
+        <th scope="col">Статус </th>
+        <th colspan="2" class="text-center">Изменить</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each page}}
+            <tr>
+                <th>{{index}}</th>
+                <td>{{title}}</td>
+                <td><a href="/page/menu/{{_id}}">{{{menu}}}</a></td>
+                <td><a href="/page/feedback/{{_id}}">{{{feedback}}}</a></td>
+                <td><a href="/page/status/{{_id}}">{{{status}}}</a></td>
+                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#upcat"
+                onclick="edit('{{_id}}')"
+                >
+                <i class="fa fa-pen"></i>
+        </button></td>
+                <td>
+                    <a href="/page/delete/{{_id}}" class="btn btn-danger" onclick="return confirm('Qaroringiz qatiymi?')"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="newcat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Новый странитц</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <form action="/page?_csrf={{csrf}}" method="post" >
+                    <input type="hidden" name="_id">
+                        <div class="form-floating mb-3">
+                                <input type="text" 
+                                class="form-control" 
+                                name="title"
+                                id="floatingInput" 
+                                required="required"
+                                placeholder="Заголовок странитц">
+                                <label for="floatingInput">Заголовок странитц</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                                <input type="text" 
+                                class="form-control" 
+                                name="slug"
+                                id="slug" 
+                                required="required"
+                                placeholder="Урл странитцы">
+                                <label for="floatingInput">Урл странитцы</label>
+                        </div>
+            
+                            <div class="col-12 mb-3">
+                                        <label class="mt-3">Описание:</label>
+                                        <textarea class="form-control" id="text" name="text" aria-label="With textarea"></textarea>   
+                            </div>
+                        <div class="form-floating mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="status"
+                                        value="1"
+                                        id="faol" checked="">
+                                    
+                                        <label class="form-check-label" for="faol">Активный?</label>
+                                    </div>   
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="menu"
+                                        value="1"
+                                        id="menu" checked="">
+                                    
+                                        <label class="form-check-label" for="faol">Меню?</label>
+                                    </div>    
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="feedback"
+                                        value="1"
+                                        id="feedback" checked="">
+                                    
+                                        <label class="form-check-label" for="faol">Форма?</label>
+                                    </div>                      
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрывать</button>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+                    </form> 
+        </div>
+        </div>
+    </div>
+    </div>
+{{!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// --}}
+
+    <div class="modal fade" id="upcat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Редактировать Новасть</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <form action="/page/save?_csrf={{csrf}}" method="post" name="editform" >
+                <input type="hidden" name="_id">
+                        <div class="form-floating mb-3">
+                                <input type="text" 
+                                class="form-control" 
+                                name="title"
+                                id="floatingInput" 
+                                required="required"
+                                placeholder="Заголовок странитц">
+                                <label for="floatingInput">Заголовок странитц</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                <input type="text" 
+                                class="form-control" 
+                                name="slug"
+                                id="slug" 
+                                required="required"
+                                placeholder="Урл странитцы">
+                                <label for="floatingInput">Урл странитцы</label>
+                        </div>
+                                <div class="col-12 mb-3">
+                                        <label class="mt-3">Описание:</label>
+                                        <textarea class="form-control" id="text1" name="text" aria-label="With textarea">{{page.text}}</textarea>   
+                            </div>
+                        <div class="form-floating mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="status"
+                                        value="1"
+                                        id="faol" checked="">
+                                    
+                                        <label class="form-check-label" for="faol">Активный?</label>
+                                    </div>   
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="menu"
+                                        value="1"
+                                        id="menu" checked="">
+                                    
+                                        <label class="form-check-label" for="faol">Меню?</label>
+                                    </div>    
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="feedback"
+                                        value="1"
+                                        id="feedback" checked="">
+                                    
+                                        <label class="form-check-label" for="faol">Форма?</label>
+                                    </div>                      
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрывать</button>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+                    </form> 
+        </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+
+    <script>
+        
+
+
+        CKEDITOR.replace('text');
+    
+        let form = document.forms.editform
+        function edit(id){
+            fetch(`/page/get/${id}`)
+            .then(res => res.json())
+            .then(page =>{
+                form.title.value = page.title
+                form._id.value = page._id
+                form.slug.value = page.slug
+                form.status.checked = page.status == 1 ? true : false
+                form.menu.checked = page.menu == 1 ? true : false
+                form.feedback.checked = page.feedback == 1 ? true : false
+                form.text1.value = page.text; 
+    
+                CKEDITOR.replace('text1');
+                
+            
+            })
+        }
+    </script>  

@@ -1,0 +1,104 @@
+<div class="row justify-content-md-center">
+    <div class="col-md-12 col-lg-4">
+        <div class="card login-box-container">
+        <div class="card-body">
+            <div class="authent-logo">
+            <img src="/images/logo@2x.png" alt="" />
+            </div>
+            <div class="authent-text">
+            <p>Admin panelga xush kelibsiz</p>
+            <p>Account yaratish uchun ma'lumotlaringizni kiriting</p>
+            </div>
+            <form action="/users/reg" method="post">
+            <input type="hidden" name="_csrf" value="{{csrf}}" />
+                <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    name="name"
+                    type="text"
+                    class="form-control"
+                    placeholder="Fullname"
+                />
+                <label for="floatingInput">Ism</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    name="login"
+                    type="text"
+                    class="form-control"
+                    placeholder="Login"
+                    onblur="check(event)"
+                >
+                <label for="floatingInput">Login</label>
+                <div class="invalid-feedback" id="loginmsg">
+                    Iltimos original nom o'ylab toping
+                </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                />
+                <label for="floatingPassword">Password</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    name="confirmpassword"
+                    type="password"
+                    class="form-control"
+                    id="floatingPassword1"
+                    placeholder="Maxfiy Kalitni Tasdiqlash"
+                />
+                <label for="floatingPassword">Passwordni tasdiqlash</label>
+                </div>
+            </div>
+            <div class="mb-3 form-check">
+                <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+                />
+                <label class="form-check-label" for="exampleCheck1">Men 
+                <a href="#">Shartlarga Roziman</a></label>
+            </div>
+            <div class="d-grid">
+                <button
+                type="submit"
+                class="btn btn-primary m-b-xs"
+                >Ro'yxatdan o'tish</button>
+            </div>
+            </form>
+            <div class="authent-login">
+            <p>Accountingiz bormi? <a href="/users/login">Kirish</a></p>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function check(e){ 
+    let login = e.target.value 
+    if (login){
+        fetch(`/users/check/${login}`) 
+        .then(res=>res.json()) 
+        .then(val=> {
+            if(val){
+                document.getElementById('loginmsg').style.display = 'block'
+            }else{
+                document.getElementById('loginmsg').style.display = 'none'
+            }
+        })
+    }
+}
+</script>

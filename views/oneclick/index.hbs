@@ -1,0 +1,116 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+        <h5 class="card-title">{{title}}</h5>
+        </div>
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>№</th>
+        <th scope="col">Имя получателя</th>
+        <th scope="col">Номер телефон</th>
+        <th scope="col">Продукт</th>
+        <th scope="col">Адрес</th>
+        <th scope="col">Время</th>
+        <th class="align-items-center text-center "scope="col">Статус</th>
+
+        <th colspan="2" class="text-center">Удалить</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each oneclick}}
+            <tr>
+                <th>{{index}}</th>
+                <td>{{name}}</td>
+                <th>{{phone}}</th>
+                <th>{{product.title}}</th>
+                <th>{{address}}</th>
+                <th>{{createdAt}}</th>
+                <td class="align-items-center text-center "><a href="/oneclick/status/{{_id}}">{{{status}}}</a></td>
+                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#upcat"
+                onclick="edit('{{_id}}')"
+                >
+                <i class="fa fa-pen"></i>
+        </button></td>
+                <td>
+                    <a href="/oneclick/delete/{{_id}}" class="btn btn-danger" onclick="return confirm('Qaroringiz qatiymi?')"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+    </div>
+</div>
+                     <div class="modal fade" id="upcat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Редактировать</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <form action="/oneclick/save?_csrf={{csrf}}" method="post" name="editform" >
+               
+                    
+                    <input type="hidden" name="_id">
+                        <div class="form-floating mb-3">
+                                <input type="text" 
+                                class="form-control" 
+                                name="name"
+                                id="floatingInput" 
+                                required="required"
+                                placeholder="Имя получателя">
+                                <label for="floatingInput">Имя получателя</label>
+                                </div>
+                        <div class="form-floating mb-3">
+                                <input type="number" 
+                                name="phone"
+                                required="required"
+                                class="form-control" 
+                                id="floatingInput" 
+                                placeholder="Номер телефона">
+                                <label for="floatingInput">Номер телефона</label>
+                                </div>
+                                 <div class="form-floating mb-3">
+                                <input type="text" 
+                                name="address"
+                                required="required"
+                                class="form-control" 
+                                id="floatingInput" 
+                                placeholder="Номер телефона">
+                                <label for="floatingInput">Адрес</label>
+                                </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="status"
+                                        value="1"
+                                        id="faol" checked="">
+                                    
+                                        <label class="form-check-label" for="faol">Активный?</label>
+                                    </div>                
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрывать</button>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+                    </form> 
+        </div>
+        </div>
+    </div>
+<script>
+        let form = document.forms.editform
+        let img = document.getElementById('showimg')
+        function edit(id){
+            fetch(`/oneclick/get/${id}`)
+            .then(res => res.json())
+            .then(oneclick =>{ 
+                form.name.value = oneclick.name || ''
+                form._id.value = oneclick._id
+                form.phone.value = oneclick.phone
+                form.address.value = oneclick.address 
+                form.status.checked = oneclick.status == 1 ? true : false
+
+            }) 
+        }
+    </script>  

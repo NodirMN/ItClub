@@ -1,0 +1,261 @@
+<div class="main-wrapper">
+                        
+                        <div class="row">
+                        <div class="col-md-12 col-lg-6">
+                            <div class="card">
+                            <div class="card-body">
+                                <div class="post-header">
+                                    {{#if user.img}}
+                                    <img src="/{{user.img}}" alt="">
+                                    {{else}}
+                                    <img src="/{{user.img}}" alt="">
+                                    {{/if}}
+                                    <div class="post-info">
+                                        <span class="post-author">{{user.name}} ({{user.login}})</span><br>
+                                    
+                                    </div>
+                                </div>
+
+            <div class="authent-text">
+            <p>Создать пользователя</p>
+            </div>
+            <form action="/userprofile/save?_csrf={{csrf}}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_id" value="{{user._id}}">
+            <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3">
+                        <label for="">Фотография блога</label>
+                            <input class="form-control" name="img" type="file" id="img" multiple="">
+                    </div>
+                <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    name="name"
+                    type="text"
+                    class="form-control"
+                    placeholder="Fullname"
+                />
+                <label for="floatingInput">Имя</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    name="login"
+                    type="text"
+                    class="form-control"
+                    placeholder="Login"
+                    onblur="check(event)"
+                >
+                <label for="floatingInput">Логин</label>
+                <div class="invalid-feedback" id="loginmsg">
+                    Пожалуйста, придумайте оригинальное название
+                </div>
+                </div>
+            </div>
+                <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example" name="roles">
+                                        <option selected="" id="roles" value="roles"> Виберете должнисть</option>
+                                        <option value="Админ">Админ</option>
+                                        <option value="Колл-центр">Колл-центр</option>
+                                        <option value="Контент-менеджер">Контент-менеджер</option>
+                                        </select>
+                    </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                />
+                <label for="floatingPassword">Пароль</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    name="confirmpassword"
+                    type="password"
+                    class="form-control"
+                    id="floatingPassword1"
+                    placeholder="Maxfiy Kalitni Tasdiqlash"
+                />
+                <label for="floatingPassword">Подтвердите пароль</label>
+                </div>
+            </div>
+            <div class="modal-footer p-0">
+            <button type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+            </form>
+            
+            </div>
+                    </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                        <div class="card">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary">
+                            Пользовател <span class="badge bg-success">{{users.length}}</span>
+                            </button>
+                            <div class="story-list ">
+                                <div class="story">
+                                <table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            
+        <th scope="col">Аватар</th>
+        <th scope="col">Имя</th>
+
+        <th scope="col">Должность </th>
+        <th colspan="2" class="text-center">Изменить</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each users}}
+            <tr>
+                <th>  <a href="#"><img src="{{img}}" alt=""></a></th>
+                <th>{{name}}</th>
+                <td >
+                    {{!-- <a href="/userprofile/status/{{_id}}">{{{status}}}</a> --}}
+                    <span class="badge bg-success">
+                    {{roles}}
+                    </span>
+                    </td>
+                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#upcat"
+                onclick="edit('{{_id}}')"
+                >
+                <i class="fa fa-pen"></i>
+        </button></td>
+                <td>
+                    <a href="/userprofile/delete/{{_id}}" class="btn btn-danger" onclick="return confirm('Вы действительно хотите удалить пользователя?')"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                        </div>
+{{!-- ////////////////////////////////////////////////////////////////// --}}
+
+<div class="modal fade" id="upcat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-ls">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Редактировать пользователя</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+        <form action="/userprofile/update?_csrf={{csrf}}" method="post" enctype="multipart/form-data" name="editform" >
+            <input type="hidden" name="_id">
+                <input type="hidden" name="_csrf" value="{{csrf}}">
+                        <img src="" alt="" id="showimg" width="60" style="display:none ;">
+                <div class="mb-3">
+                        <label for="">Аватар</label>
+                         <div class="col-6">
+                            </div>
+                            <input class="form-control" name="img" type="file" id="img" multiple="">
+                    </div>
+
+                  
+                <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    name="name"
+                    type="text"
+                    class="form-control"
+                    placeholder="Fullname"
+                />
+                <label for="floatingInput">Имя</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                <input
+                    name="login"
+                    type="text"
+                    class="form-control"
+                    placeholder="Login"
+                    onblur="check(event)"
+                />
+                <label for="floatingInput">Логин</label>
+                <div class="invalid-feedback" id="loginmsg">
+                    Пожалуйста, придумайте оригинальное название
+                </div>
+                </div>
+            </div>
+                 <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example" name="roles">
+                                        <option selected="" id="roles" value="roles"> Виберете должнисть</option>
+                                        <option value="Админ">Админ</option>
+                                        <option value="Колл-центр">Колл-центр</option>
+                                        <option value="Контент-менеджер">Контент-менеджер</option>
+                                        </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрывать</button>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+                    </form> 
+        </div>
+        </div>
+    </div>
+    </div>
+    
+</div>
+<script>
+
+function check(e){ 
+    let login = e.target.value 
+    if (login){
+        fetch(`/users/check/${login}`) 
+        .then(res=>res.json()) 
+        .then(val=> {
+            if(val){
+                document.getElementById('loginmsg').style.display = 'block'
+            }else{
+                document.getElementById('loginmsg').style.display = 'none'
+            }
+        })
+    } 
+}
+
+    let form = document.forms.editform
+    let img = document.getElementById('showimg')       
+        function edit(id){
+            fetch(`/userprofile/get/${id}`)
+            .then(res => res.json())
+            .then(userprofile =>{ 
+                form.name.value = userprofile.name || ''
+                form._id.value = userprofile._id
+                form.login.value = userprofile.login
+                form.password.value = userprofile.password
+                form.roles.value = userprofile.roles
+
+                if(users.img){
+                    img.setAttribute('src', `${users.img}`)
+                    img.style.display = 'block'
+                }
+
+            }) 
+        }
+
+
+</script> 
+
+
+
+
+
+
+
+
+
+  

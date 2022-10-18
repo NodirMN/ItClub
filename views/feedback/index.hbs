@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+        <h5 class="card-title">{{title}}</h5>
+        </div>
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>№</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Телефон</th>
+        <th scope="col">Текст</th>
+        <th scope="col">Время</th>
+        <th class="align-items-center text-center "scope="col">Статус</th>
+
+        <th colspan="2" class="text-center">Удалить</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each feedback}}
+            <tr>
+                <th>{{index}}</th>
+                <td>{{name}}</td>
+                <th>{{phone}}</th>
+                <th>{{text}}</th>
+                <th>{{createdAt}}</th>
+                <td class="align-items-center text-center "><a href="/feedback/status/{{_id}}">{{{status}}}</a></td>
+                <td class="align-items-center text-center ">
+                    <a href="/feedback/delete/{{_id}}" class="btn btn-danger ali" onclick="return confirm('Qaroringiz qatiymi?')"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+    </div>
+</div>
+

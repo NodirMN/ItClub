@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="profile-cover"></div>
+        <div class="profile-header">
+        <div class="profile-img">
+
+            {{#each users}}
+            <img src="{{img}}" alt="" />
+            {{/each}}  
+        </div>
+        <div class="profile-name">
+
+    
+        <h3>{{name}}</h3>
+            
+        </div>
+        </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-md-12 col-lg-8">
+        <div class="card">
+        <div class="card-body">
+                        <h5 class="card-title">{{title}}</h5>
+                                
+                                <form class="row g-3 needs-validation" action="/users/save?_csrf={{csrf}}" method="post"  name="editform"  enctype="multipart/form-data">
+                                    <input type="hidden" name="_id" >
+                                    <div class="col-md-4">
+                                    <label for="validationCustom01" class="form-label">Имя</label>
+                                    <input type="text"  class="form-control" name="name" id="validationCustom01"  required="">
+                                    </div>
+                                    <div class="col-md-4">
+                                    <label for="validationCustom02" class="form-label">Логин</label>
+                                    <input type="text"  class="form-control" name="login" id="validationCustom02"  required="">
+                                    
+                                    </div> 
+                                    <div class="col-md-4">
+                                    <label for="validationCustomUsername" class="form-label">Почта</label>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                        <input type="text"  class="form-control" name="email" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required="">
+                                        <div class="invalid-feedback">
+                                        Please choose a username.
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    <label for="validationCustom03" class="form-label">Фото админа</label>
+                                    <input class="form-control" name="img" type="file" id="img" multiple="">
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                    </div>
+                                    <div class="col-12">
+                                    </div>
+                                    <div class="col-12">
+                                            <div class="modal-footer p-0">
+                                                <button type="submit" class="btn btn-primary">Изменить</button>
+                                            </div>
+                                
+                                    </div>
+                                </form>
+                            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-3">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Contact Info</h5>
+            <ul class="list-unstyled profile-about-list">
+            <li><i class="far fa-envelope m-r-xxs"></i><span
+                ></span></li>
+            <li><i class="far fa-compass m-r-xxs"></i><span>Lives in
+                <a href="#">San Francisco, CA</a></span></li>
+            <li><i class="far fa-address-book m-r-xxs"></i><span>+1 (678) 290 1680</span></li>
+            </ul>
+        
+        </div>
+    </div>
+</div>
+
+<script>
+        let form = document.forms.editform
+        function edit(id){
+            fetch(`/users/get/${id}`)
+            .then(res => res.json())
+            .then(users =>{
+                form.name.value = users.name
+                form._id.value = users._id
+                form.email.value = users.email
+                form.login.value = users.login
+
+                
+            })
+        }
+    </script>  

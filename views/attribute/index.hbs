@@ -1,0 +1,177 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+        <h5 class="card-title">{{title}}</h5>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newcat">
+                Новый атрибут
+        </button>
+        </div>
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+        <th>№</th>
+        <th scope="col">Названия</th>
+        <th scope="col">Категория</th>
+        <th scope="col">Порядковый номер</th>
+        <th scope="col">Статус </th>
+        <th colspan="2" class="text-center">Изменить</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each attribute}}
+            <tr>
+                <th>{{index}}</th>
+                <td>{{title}}</td>
+                <td>{{category.title}}</td>
+                <td>{{order}}</td>
+
+                <td><a href="/attribute/status/{{_id}}">{{{status}}}</a></td>
+                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#upcat"
+                onclick="edit('{{_id}}')"
+                >
+                <i class="fa fa-pen"></i>
+        </button></td>
+                <td>
+                    <a href="/attribute/delete/{{_id}}" class="btn btn-danger" onclick="return confirm('Qaroringiz qatiymi?')"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+    </div>
+</div>
+
+{{!-- ///////////////////////////////////////////NEW --}}
+
+<div class="modal fade" id="newcat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Новая категория</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <form action="/attribute?_csrf={{csrf}}" method="post" >
+                    <div class="form-floating mb-3">
+                                <input type="text" 
+                                class="form-control" 
+                                name="title"
+                                id="floatingInput" 
+                                required="required"
+                                placeholder="Названия">
+                                <label for="floatingInput">Названия</label>
+                                </div>
+                    <div class=" mb-3">
+                                    <select class="form-select " name="category">
+                                        <option selected="" disabled>Категория</option>
+                                        {{#each category}}
+                                        <option value="{{_id}}">{{title}}</option>
+                                        {{/each}}
+                                        </select>
+                                        <div class="invalid-feedback">Выберите из списка</div>
+                    </div>
+                        <div class="form-floating mb-3">
+                                <input type="number" 
+                                value="0"
+                                name="order"
+                                required="required"
+                                class="form-control" 
+                                id="floatingInput" 
+                                placeholder="Порядковый номер">
+                                <label for="floatingInput">Порядковый номер</label>
+                                </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="status"
+                                        value="1"
+                                        id="faol" checked="">
+                                    
+                                        <label class="form-check-label" for="faol">Активный?</label>
+                                    </div>                
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрывать</button>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+                    </form> 
+        </div>
+        </div>
+    </div>
+
+
+
+  <div class="modal fade" id="upcat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Редактировать атрибута</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <form action="/attribute/save?_csrf={{csrf}}" method="post" name="editform">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <input type="hidden" name="_id">
+                    <div class="mb-3">
+                                    <select class="form-select " name="category">
+                                        <option selected="" disabled>Mahsulot bo`limi</option>
+                                        {{#each category}}
+                                        <option value="{{_id}}">{{title}}</option>
+                                        {{/each}}
+                                        <label for="floatingSelect">Mahsulot bo`limi</label>
+                                        </select>
+                    </div>
+                        <div class="form-floating mb-3">
+                                <input type="text" 
+                                class="form-control" 
+                                name="title"
+                                id="floatingInput" 
+                                required="required"
+                                placeholder="Заголовок раздела">
+                                <label for="floatingInput">Заголовок раздела</label>
+                                </div>
+                        <div class="form-floating mb-3">
+                                <input type="number" 
+                                value="0"
+                                name="order"
+                                required="required"
+                                class="form-control" 
+                                id="floatingInput" 
+                                placeholder="Порядковый номер">
+                                <label for="floatingInput">Порядковый номер</label>
+                                </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" 
+                                        name="status"
+                                        value="1"
+                                        id="faol" checked="">
+                                    
+                                        <label class="form-check-label" for="faol">Активный?</label>
+                                    </div>                
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрывать</button>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+                    </form> 
+        </div>
+        </div>
+    </div>
+
+
+    <script>
+        let form = document.forms.editform
+        let img = document.getElementById('showimg')
+        function edit(id){
+            fetch(`/attribute/get/${id}`)
+            .then(res => res.json())
+            .then(attribute =>{
+                form.title.value = attribute.title
+                form._id.value = attribute._id
+                form.category.value = attribute.category
+                form.order.value = attribute.order
+                form.status.checked = attribute.status == 1 ? true : false
+                
+            })
+        }
+    </script>  

@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-body">
+        <h3 >{{product.title}}</h3>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                    {{#each product.photos}}
+                        <div class="col-2">
+                        <img src="/{{this}}" alt="" width="100%">
+                        </div>
+                    {{/each}}
+                    </div>
+                </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-12">
+                <table class="table table-bordered  table-hover">
+                    <tbody>
+                        <tr>
+                            <th>Цена:</th>
+                            <th>{{product.price}} so'm </th>
+                        </tr>
+                        <tr>
+                            <th>Скидка:</th>
+                            <th>{{product.sale}} %</th>
+                        </tr>
+                        <tr>
+                            <th>Статус:</th>
+                            <th>{{{product.status}}}</th>
+                        </tr>
+                        <tr>
+                            <th>Время создания товара:</th>
+                            <th>{{product.createdAt}}</th>
+                        </tr>
+                        <tr>
+                            <th>Описание товара:</th>
+                            <th>{{{product.text}}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    <div>
+</div>
